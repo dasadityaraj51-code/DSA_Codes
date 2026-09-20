@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int calcAddr(int choice, int B, int W, int I, int J, int LR, int LC, int M, int N)
+{
+    int addr;
+
+    if (choice == 1)
+    {
+        addr = B + W * ((I - LR) * N + (J - LC));   // Row Major
+    }
+    else if (choice == 2)
+    {
+        addr = B + W * ((J - LC) * M + (I - LR));
+    }
+    else
+    {
+        return -1;
+    }
+
+    return addr;
+}

@@ -1,0 +1,48 @@
+//Implement the sorting which checks the 
+adjacent elements and swaps for an array of 10 elements 
+for only one external loop Iteration and take the
+intermediate array and perform that sorting which performs worst when the array is sorted
+
+
+void bubblesort(int arr[], int size)
+{
+    for (int i = 0; i < size - 1; i++)
+    {
+        if (arr[i] > arr[i + 1])
+        {
+            int temp = arr[i];
+            arr[i] = arr[i + 1];
+            arr[i + 1] = temp;
+        }
+    }
+}
+
+int partition(int a[], int low, int high)
+{
+    int pivot = a[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; j++)
+    {
+        if (a[j] < pivot)
+        {
+            i++;
+            swap(&a[i], &a[j]);
+        }
+    }
+
+    swap(&a[i + 1], &a[high]);
+
+    return (i + 1);
+}
+
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        int pi = partition(arr, low, high);
+
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}

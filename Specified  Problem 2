@@ -1,0 +1,36 @@
+// Perform Insertion Sort first and then perform Binary Search on the sorted array
+
+void insertionSort(int arr[], int size)
+{
+    for (int step = 1; step < size; step++)
+    {
+        int key = arr[step];
+        int j = step - 1;
+
+        while (j >= 0 && key < arr[j])
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+        arr[j + 1] = key;
+    }
+}
+
+int binarySearch(int arr[], int x, int low, int high)
+{
+    while (low <= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        if (x == arr[mid])
+            return mid;
+
+        if (x > arr[mid])
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+
+    return -1;
+}

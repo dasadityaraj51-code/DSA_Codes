@@ -1,0 +1,175 @@
+#include <stdio.h>
+
+void display(int arr[], int size)
+{
+    printf("\n");
+    for (int j = 0; j < size; j++)
+        printf("%d ", arr[j]);
+    printf("\n");
+}
+
+/* Bubble Sort */
+void bubbleSort(int arr[], int size)
+{
+    for (int step = 0; step < size - 1; step++)
+    {
+        for (int i = 0; i < size - step - 1; i++)
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+    }
+
+    display(arr, size);
+}
+
+/* Selection Sort */
+void selectionSort(int arr[], int size)
+{
+    for (int step = 0; step < size - 1; step++)
+    {
+        int min_idx = step;
+
+        for (int j = step + 1; j < size; j++)
+        {
+            if (arr[j] < arr[min_idx])
+                min_idx = j;
+        }
+
+        int temp = arr[min_idx];
+        arr[min_idx] = arr[step];
+        arr[step] = temp;
+    }
+
+    display(arr, size);
+}
+
+/* Insertion Sort */
+void insertionSort(int arr[], int size)
+{
+    for (int step = 1; step < size; step++)
+    {
+        int key = arr[step];
+        int j = step - 1;
+
+        while (j >= 0 && key < arr[j])
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+        arr[j + 1] = key;
+    }
+
+    display(arr, size);
+}
+
+/* Advanced Bubble Sort */
+void advancedBubbleSort(int arr[], int size)
+{
+    int swap;
+
+    for (int step = 0; step < size - 1; step++)
+    {
+        swap = 0;
+
+        for (int i = 0; i < size - step - 1; i++)
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                swap = 1;
+            }
+        }
+
+        if (swap == 0)
+            break;
+    }
+
+    display(arr, size);
+}
+
+/* Advanced Selection Sort */
+void advancedSelectionSort(int arr[], int size)
+{
+    for (int step = 0; step < size / 2; step++)
+    {
+        int min = step;
+        int max = size - step - 1;
+
+        for (int i = step + 1; i < size - step; i++)
+        {
+            if (arr[i] < arr[min])
+                min = i;
+
+            if (arr[i] > arr[max])
+                max = i;
+        }
+
+        int temp = arr[min];
+        arr[min] = arr[step];
+        arr[step] = temp;
+
+        if (max == step)
+            max = min;
+
+        temp = arr[max];
+        arr[max] = arr[size - step - 1];
+        arr[size - step - 1] = temp;
+    }
+
+    display(arr, size);
+}
+
+int main()
+{
+    int arr[] = {7, 3, 9, 2, 5, 1};
+    int size = 6;
+    int choice;
+
+    printf("Original Array: ");
+    display(arr, size);
+
+    printf("\n1. Bubble Sort");
+    printf("\n2. Selection Sort");
+    printf("\n3. Insertion Sort");
+    printf("\n4. Advanced Bubble Sort");
+    printf("\n5. Advanced Selection Sort");
+
+    printf("\n\nEnter your choice: ");
+    scanf("%d", &choice);
+
+    switch (choice)
+    {
+        case 1:
+            bubbleSort(arr, size);
+            break;
+
+        case 2:
+            selectionSort(arr, size);
+            break;
+
+        case 3:
+            insertionSort(arr, size);
+            break;
+
+        case 4:
+            advancedBubbleSort(arr, size);
+            break;
+
+        case 5:
+            advancedSelectionSort(arr, size);
+            break;
+
+        default:
+            printf("Invalid choice");
+    }
+
+    return 0;
+}

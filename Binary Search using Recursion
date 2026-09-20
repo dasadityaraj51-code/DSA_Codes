@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int binarySearch(int arr[], int x, int low, int high)
+{
+    if (high >= low)
+    {
+        int mid = low + (high - low) / 2;
+
+        if (x == arr[mid])
+            return mid;
+
+        if (x > arr[mid])
+            return binarySearch(arr, x, mid + 1, high);
+
+        return binarySearch(arr, x, low, mid - 1);
+    }
+
+    return -1;
+}

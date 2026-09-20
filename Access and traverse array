@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+int main()
+{
+    int i, m, n, i = 0;
+
+    printf("Enter size of 1D array: ");
+    scanf("%d", &m);
+
+    int arr[m];
+
+    printf("Enter elements of 1D array:\n");
+    while (i < m)
+    {
+        scanf("%d", &arr[i]);
+        i++;
+    }
+
+    printf("Enter rows and columns of 2D array:\n");
+    scanf("%d %d", &m, &n);
+
+    printf("Enter elements of 2D array:\n");
+
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            scanf("%d", &arr[i][j]);
+        }
+    }
+
+    printf("1D Array:\n");
+    while (i < m)
+    {
+        printf("%d ", arr[i]);
+        i++;
+    }
+
+    printf("\n2D Array:\n");
+
+    for (i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}

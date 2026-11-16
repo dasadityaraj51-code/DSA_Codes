@@ -1,0 +1,181 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+struct Node *head = NULL;
+
+int main() {
+    struct Node *first = malloc(sizeof(struct Node));
+    struct Node *second = malloc(sizeof(struct Node));
+    struct Node *third = malloc(sizeof(struct Node));
+
+    if (first == NULL || second == NULL || third == NULL) {
+        printf("Not allocated");
+        return 1;
+    }
+
+    first->data = 10;
+    second->data = 20;
+    third->data = 30;
+
+    first->next = second;
+    second->next = third;
+    third->next = NULL;
+
+    head = first;
+
+    return 0;
+}
+
+void insertBeg(int data) {
+    struct Node *new = malloc(sizeof(struct Node));
+
+    if (new == NULL) {
+        printf("Not allocated");
+        return;
+    }
+
+    new->data = data;
+    new->next = head;
+    head = new;
+}
+
+void insertEnd(int val) {
+    struct Node *new = malloc(sizeof(struct Node));
+
+    if (new == NULL) {
+        printf("Not allocated");
+        return;
+    }
+
+    new->data = val;
+    new->next = NULL;
+
+    struct Node *current = head;
+
+    if (head == NULL) {
+        head = new;
+        return;
+    }
+
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    current->next = new;
+}
+
+void deleteBeg() {
+    if (head == NULL) {
+        printf("Cannot delete");
+        return;
+    }
+
+    struct Node *temp = head;
+    head = head->next;
+    free(temp);
+}
+
+void deleteEnd() {
+    if (head == NULL) {
+        printf("Cannot delete");
+        return;
+    }
+
+    if (head->next == NULL) {
+        free(head);
+        head = NULL;
+        return;
+    }
+
+    struct Node *temp = head;
+
+    while (temp->next->next != NULL) {
+        temp = temp->next;
+    }
+
+    free(temp->next);
+    temp->next = NULL;
+}
+
+void search(int val) {
+    struct Node *current = head;
+
+    while (current != NULL) {
+        if (current->data == val) {
+            printf("Found");
+            return;
+        }
+
+        current = current->next;
+    }
+
+    printf("Not Found");
+}
+
+void insertPos(int val, int pos) {
+    if (pos < 1) {
+        printf("Invalid Position");
+        return;
+    }
+
+    if (pos == 1) {
+        insertBeg(val);
+        return;
+    }
+
+    struct Node *current = head;
+
+    for (int i = 1; i < pos - 1 && current != NULL; i++) {
+        current = current->next;
+    }
+
+    if (current == NULL) {
+        printf("Invalid");
+        return;
+    }
+
+    struct Node *new = malloc(sizeof(struct Node));
+
+    if (new == NULL) {
+        printf("Failed");
+        return;
+    }
+
+    new->data = val;
+    new->next = current->next;
+    current->next = new;
+}
+
+void deletePos(int pos) {
+    if (pos < 1 || head == NULL) {
+        printf("Invalid");
+        return;
+    }
+
+    if (pos == 1) {
+        deleteBeg();
+        return;
+    }
+
+    struct Node *current = head;
+
+    for (int i = 1; i < pos - 1 && current != NULL; i++) {
+        current = current->next;
+    }
+
+    if (current == NULL || current->next == NULL) {
+        printf("Invalid");
+        return;
+    }
+
+    struct Node *temp = current->next;
+    current->next = temp->next;
+
+    free(temp);
+}

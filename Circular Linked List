@@ -1,0 +1,77 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+int main()
+{
+    struct node *head, *first, *second, *third;
+
+    head = (struct node*)malloc(sizeof(struct node));
+    first = (struct node*)malloc(sizeof(struct node));
+    second = (struct node*)malloc(sizeof(struct node));
+    third = (struct node*)malloc(sizeof(struct node));
+
+    head->data = 10;
+    head->next = first;
+
+    first->data = 20;
+    first->next = second;
+
+    second->data = 30;
+    second->next = third;
+
+    third->data = 40;
+    third->next = head;
+
+    // Display
+    struct node *temp = head;
+
+    printf("Circular Linked List: ");
+
+    do
+    {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while(temp != head);
+
+    printf("HEAD\n");
+
+    // Search
+    int key, pos = 1, found = 0;
+
+    printf("Enter value to search: ");
+    scanf("%d", &key);
+
+    temp = head;
+
+    do
+    {
+        if(temp->data == key)
+        {
+            found = 1;
+            break;
+        }
+
+        temp = temp->next;
+        pos++;
+
+    } while(temp != head);
+
+    if(found)
+        printf("Found at position %d", pos);
+    else
+        printf("Value not found");
+
+    free(head);
+    free(first);
+    free(second);
+    free(third);
+
+    return 0;
+}

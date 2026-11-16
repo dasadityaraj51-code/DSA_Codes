@@ -1,0 +1,22 @@
+
+void reverse() {
+    struct Node *prev = NULL, *current = head, *next;
+
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+
+    head = prev;
+
+    current = head;
+
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+
+    printf("NULL");
+}
